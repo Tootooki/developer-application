@@ -93,6 +93,10 @@ function validateHH() {
   } catch { input.setCustomValidity('Укажите полную ссылку HeadHunter, начиная с https://hh.ru/'); }
 }
 function updateProgress() {
+  for (const id of ['candidate-name', 'candidate-city']) {
+    const input = $(id);
+    input.setCustomValidity(input.value && !input.value.trim() ? 'Заполните поле: пробелы не считаются ответом.' : '');
+  }
   validateHH();
   const core = [$('candidate-name'), $('candidate-city'), $('candidate-hh'), $('read-instructions')];
   let count = core.filter(c => c.type === 'checkbox' ? c.checked : c.value.trim() && c.validity.valid).length;
