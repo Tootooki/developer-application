@@ -1,5 +1,8 @@
 import { CodersUpload } from './client.mjs';
 const config = window.HIRING_CONFIG;
+const i18n = window.HIRING_I18N;
+const t = (text, values) => i18n.t(text, values);
+const setText = (id, text, values) => i18n.bindText($(id), text, values);
 const $ = (id) => document.getElementById(id);
 const form = $('candidate-form');
 const dialog = $('review-dialog');
@@ -13,6 +16,7 @@ let fileGeneration = 0;
 let sending = false;
 let submitted = false;
 const questionControls = new Map();
+let reviewContext = null;
 
 function el(tag, className, text) {
   const node = document.createElement(tag);
@@ -77,8 +81,35 @@ for (const question of config.questions) {
   }
   questionControls.set(question.id, controls);
   $('questions').append(wrapper);
+  i18n.registerTree(wrapper);
 }
-$('assignment-description').textContent = config.assignment.description;
+setText('assignment-description', config.assignment.description);
+
+const otherToolsField = el('div', 'field other-tools-field');
+otherToolsField.hidden = true;
+const otherToolsLabel = el('label', '', 'Указать свои инструменты');
+otherToolsLabel.htmlFor = 'other-tools';
+const otherToolsInput = el('input');
+otherToolsInput.id = 'other-tools';
+otherToolsInput.name = 'toolsOther';
+otherToolsInput.type = 'text';
+otherToolsInput.maxLength = 500;
+otherToolsInput.placeholder = 'Например: GitHub Copilot, Windsurf';
+otherToolsInput.disabled = true;
+otherToolsField.append(otherToolsLabel, otherToolsInput);
+questionControls.get('tools')[0].closest('fieldset').append(otherToolsField);
+i18n.registerTree(otherToolsField);
+const otherToolsChoice = questionControls.get('tools').find(input => input.value === 'Другие');
+function updateOtherTools() {
+  const selected = otherToolsChoice.checked;
+  otherToolsField.hidden = !selected;
+  otherToolsInput.disabled = !selected;
+  otherToolsInput.required = selected;
+  otherToolsChoice.setAttribute('aria-expanded', String(selected));
+  otherToolsInput.setCustomValidity(selected && !otherToolsInput.value.trim() ? t('Укажите свои инструменты или снимите отметку «Другие».') : '');
+}
+otherToolsChoice.setAttribute('aria-controls', 'other-tools');
+otherToolsChoice.setAttribute('aria-expanded', 'false');
 
 function validateHH() {
   const input = $('candidate-hh');
@@ -88,16 +119,17 @@ function validateHH() {
     const url = new URL(input.value.trim());
     const host = url.hostname.toLowerCase();
     if (url.protocol !== 'https:' || !(host === 'hh.ru' || host.endsWith('.hh.ru'))) {
-      input.setCustomValidity('Укажите ссылку на профиль или резюме HeadHunter: https://hh.ru/…');
+      input.setCustomValidity(t('Укажите ссылку на профиль или резюме HeadHunter: https://hh.ru/…'));
     }
-  } catch { input.setCustomValidity('Укажите полную ссылку HeadHunter, начиная с https://hh.ru/'); }
+  } catch { input.setCustomValidity(t('Укажите полную ссылку HeadHunter, начиная с https://hh.ru/')); }
 }
 function updateProgress() {
   for (const id of ['candidate-name', 'candidate-city']) {
     const input = $(id);
-    input.setCustomValidity(input.value && !input.value.trim() ? 'Заполните поле: пробелы не считаются ответом.' : '');
+    input.setCustomValidity(input.value && !input.value.trim() ? t('Заполните поле: пробелы не считаются ответом.') : '');
   }
   validateHH();
+  updateOtherTools();
   const core = [$('candidate-name'), $('candidate-city'), $('candidate-hh'), $('read-instructions')];
   let count = core.filter(c => c.type === 'checkbox' ? c.checked : c.value.trim() && c.validity.valid).length;
   let total = core.length;
@@ -106,18 +138,19 @@ function updateProgress() {
     const controls = questionControls.get(q.id);
     if (q.type === 'radio' || q.type === 'checkboxes' ? controls.some(c => c.checked) : controls[0].value.trim()) count++;
   }
+  if (otherToolsChoice.checked) { total++; if (otherToolsInput.value.trim()) count++; }
   $('form-progress').max = total;
   $('form-progress').value = count;
-  $('progress-text').textContent = `Заполнено ${count} из ${total} пунктов`;
+  setText('progress-text', 'Заполнено {count} из {total} пунктов', { count, total });
 }
 form.addEventListener('input', updateProgress);
 form.addEventListener('change', updateProgress);
 updateProgress();
 
 function formatBytes(bytes) {
-  if (bytes >= 1024 ** 3) return `${(bytes / 1024 ** 3).toFixed(2)} ГиБ`;
-  if (bytes >= 1024 ** 2) return `${(bytes / 1024 ** 2).toFixed(1)} МиБ`;
-  return `${Math.max(1, Math.ceil(bytes / 1024))} КиБ`;
+  if (bytes >= 1024 ** 3) return t('{size} ГиБ', { size: (bytes / 1024 ** 3).toFixed(2) });
+  if (bytes >= 1024 ** 2) return t('{size} МиБ', { size: (bytes / 1024 ** 2).toFixed(1) });
+  return t('{size} КиБ', { size: Math.max(1, Math.ceil(bytes / 1024)) });
 }
 function clearFile() {
   fileGeneration++;
@@ -125,19 +158,20 @@ function clearFile() {
   checkingFile = false;
   fileInput.value = '';
   $('selected-file').hidden = true;
-  $('file-status').textContent = '';
+  setText('file-status', '');
   $('file-error').hidden = true;
   $('dropzone').classList.remove('dragging');
   submitButton.disabled = sending || submitted;
 }
 function showFileError(message) {
-  $('file-error').textContent = message;
+  setText('file-error', message);
   $('file-error').hidden = false;
 }
 async function selectFile(files) {
   if (sending || submitted) return;
+  files = Array.from(files || []);
   clearFile();
-  if (!files?.length) return;
+  if (!files.length) return;
   if (files.length !== 1) { showFileError('Выберите один ZIP-архив. Все материалы должны быть внутри него.'); return; }
   const file = files[0];
   if (!/\.zip$/i.test(file.name)) { showFileError('Нужен файл в формате .zip. Выберите ZIP-архив.'); return; }
@@ -146,7 +180,7 @@ async function selectFile(files) {
   const generation = fileGeneration;
   checkingFile = true;
   submitButton.disabled = true;
-  $('file-status').textContent = 'Проверяем формат файла…';
+  setText('file-status', 'Проверяем формат файла…');
   try {
     const signature = new Uint8Array(await file.slice(0, 4).arrayBuffer());
     if (generation !== fileGeneration) return;
@@ -157,10 +191,10 @@ async function selectFile(files) {
     $('file-name').textContent = file.name;
     $('file-size').textContent = formatBytes(file.size);
     $('selected-file').hidden = false;
-    $('file-status').textContent = 'Архив выбран. Вы можете заменить его или удалить.';
+    setText('file-status', 'Архив выбран. Вы можете заменить его или удалить.');
   } catch (error) {
     if (generation === fileGeneration) {
-      $('file-status').textContent = '';
+      setText('file-status', '');
       showFileError(error.message || 'Не удалось прочитать файл. Попробуйте выбрать его ещё раз.');
     }
   } finally {
@@ -192,38 +226,40 @@ function collectAnswers() {
     answers[question.id] = question.type === 'checkboxes' ? controls.filter(c => c.checked).map(c => c.value)
       : question.type === 'radio' ? controls.find(c => c.checked)?.value || '' : controls[0].value.trim();
   }
+  if (otherToolsChoice.checked) answers.toolsOther = otherToolsInput.value.trim();
   return answers;
 }
 function openReview(candidate, answers) {
-  $('review-title').textContent = 'Всё на своих местах.';
-  $('review-description').textContent = 'Это предварительный просмотр. Заявка не отправлена, архив не загружен на сервер.';
+  reviewContext = { candidate, answers };
+  setText('review-title', 'Проверьте Ваши данные.');
+  setText('review-description', 'Проверьте ответы и архив. Отправка заявки не выполнялась.');
   const summary = $('review-summary');
   summary.replaceChildren();
-  const values = [['Имя', candidate.name], ['Город и часовой пояс', answers.city], ['HeadHunter', candidate.headhunterUrl]];
+  const values = [[t('Имя'), candidate.name], [t('Город и часовой пояс'), answers.city], ['HeadHunter', candidate.headhunterUrl]];
   for (const question of config.questions) {
     const value = answers[question.id];
-    values.push([question.label, Array.isArray(value) ? value.join(', ') || 'Не указано' : value || 'Не указано']);
+    const displayValue = Array.isArray(value) ? value.map(option => t(option)).join(', ') : ['radio', 'select'].includes(question.type) ? t(value) : value;
+    values.push([t(question.label), displayValue || t('Не указано')]);
   }
-  values.push(['Выбранный архив', `${selectedZip.name} · ${formatBytes(selectedZip.size)}`]);
+  if (answers.toolsOther) values.push([t('Указать свои инструменты'), answers.toolsOther]);
+  values.push([t('Выбранный архив'), `${selectedZip.name} · ${formatBytes(selectedZip.size)}`]);
   for (const [label, value] of values) summary.append(el('dt', '', label), el('dd', '', value));
-  dialog.showModal();
+  if (!dialog.open) dialog.showModal();
 }
 $('close-dialog').addEventListener('click', () => dialog.close());
 $('return-to-form').addEventListener('click', () => dialog.close());
 dialog.addEventListener('click', event => { if (event.target === dialog) { const r = dialog.getBoundingClientRect(); if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) dialog.close(); } });
 
 if (live) {
-  document.querySelector('.preview-notice').hidden = true;
-  document.querySelector('.assignment-note').hidden = true;
-  document.querySelector('.assignment .pill').textContent = 'Опубликовано';
-  $('submit-hint').textContent = 'Подтверждение появится после сохранения анкеты и архива.';
-  submitButton.replaceChildren(document.createTextNode('Отправить заявку '), el('span', '', '↗'));
+  setText('submit-hint', 'Подтверждение появится после сохранения анкеты и архива.');
+  setText('submit-button', 'Отправить заявку');
   const label = el('label', 'check-row');
   const consent = el('input');
   consent.type = 'checkbox'; consent.id = 'consent'; consent.required = true;
   label.append(consent, el('span', '', config.consentText));
   $('consent-container').append(label);
   $('consent-container').hidden = false;
+  i18n.registerTree(label);
 }
 form.addEventListener('submit', async event => {
   event.preventDefault();
@@ -233,7 +269,7 @@ form.addEventListener('submit', async event => {
   if (!form.reportValidity()) return;
   for (const q of config.questions.filter(q => q.required && q.type === 'checkboxes')) {
     if (!questionControls.get(q.id).some(c => c.checked)) {
-      $('submit-error').textContent = `Выберите хотя бы один вариант: ${q.label}`;
+      setText('submit-error', 'Выберите хотя бы один вариант: {label}', { label: t(q.label) });
       $('submit-error').hidden = false;
       questionControls.get(q.id)[0].focus();
       return;
@@ -260,19 +296,26 @@ form.addEventListener('submit', async event => {
     controls.forEach(c => { c.disabled = true; });
     const receipt = await client.submit({ session, candidate, answers, zip: selectedZip, consent: $('consent').checked, onProgress: ({ percent }) => {
       $('transfer-progress').value = percent;
-      $('transfer-label').textContent = percent === 100 ? 'Файл загружен. Сохраняем заявку…' : `Загружаем архив: ${percent}%`;
+      if (percent === 100) setText('transfer-label', 'Файл загружен. Сохраняем заявку…');
+      else setText('transfer-label', 'Загружаем архив: {percent}%', { percent });
     } });
     if (receipt.status !== 'submitted') throw Error('Сервис пока не подтвердил сохранение. Повторите отправку с тем же архивом.');
     submitted = true;
     sessionStorage.removeItem(sessionKey);
-    $('transfer-label').textContent = 'Заявка сохранена.';
-    $('review-title').textContent = 'Заявка принята.';
-    $('review-description').textContent = `Анкета и архив сохранены. Номер заявки: ${receipt.id}. Для вопросов используйте чат HeadHunter.`;
+    setText('transfer-label', 'Заявка сохранена.');
+    setText('review-title', 'Заявка принята.');
+    setText('review-description', 'Анкета и архив сохранены. Номер заявки: {id}. Для вопросов используйте чат HeadHunter.', { id: receipt.id });
     $('review-summary').replaceChildren();
     dialog.showModal();
   } catch (error) {
-    $('submit-error').textContent = error.message || 'Не удалось отправить заявку. Попробуйте снова с тем же архивом.';
+    setText('submit-error', error.message || 'Не удалось отправить заявку. Попробуйте снова с тем же архивом.');
     $('submit-error').hidden = false;
     controls.forEach(c => { c.disabled = false; });
   } finally { sending = false; submitButton.disabled = submitted; }
+});
+
+window.addEventListener('hiring-language-change', () => {
+  updateProgress();
+  if (selectedZip) $('file-size').textContent = formatBytes(selectedZip.size);
+  if (dialog.open && reviewContext && !submitted) openReview(reviewContext.candidate, reviewContext.answers);
 });

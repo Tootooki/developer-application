@@ -1,10 +1,11 @@
+const translate = (text) => window.HIRING_I18N.t(text);
 const themeButton = document.getElementById('theme-toggle');
 const themeIcon = document.getElementById('theme-icon');
 const themeKey = 'developer-application-theme';
 function applyTheme(dark) {
   document.body.classList.toggle('dark', dark);
   themeButton.setAttribute('aria-pressed', String(dark));
-  themeButton.setAttribute('aria-label', dark ? 'Включить светлую тему' : 'Включить тёмную тему');
+  themeButton.setAttribute('aria-label', translate(dark ? 'Включить светлую тему' : 'Включить тёмную тему'));
   themeIcon.textContent = dark ? '☀' : '☾';
   document.querySelector('meta[name="theme-color"]').content = dark ? '#111827' : '#f3f4f6';
 }
@@ -50,3 +51,5 @@ window.addEventListener('resize', schedulePositionUpdate);
 window.addEventListener('load', schedulePositionUpdate);
 document.addEventListener('toggle', schedulePositionUpdate, true);
 updateReadingPosition();
+
+window.addEventListener('hiring-language-change', () => applyTheme(document.body.classList.contains('dark')));

@@ -3,21 +3,22 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Инструкция кандидата: разработка и AI-автоматизация, условия работы, анкета и тестовое задание.">
+<meta name="description" content="Вакансия Coder / ИИ-автоматизация: условия работы, анкета и тестовое задание.">
 <meta name="theme-color" content="#f3f4f6">
-<title>Инструкция кандидата — разработчик / AI-автоматизация</title>
+<title>Вакансия: Coder / ИИ-автоматизация</title>
 <link rel="icon" href="icon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="styles.css?v=guide-2">
-<script src="config.js" defer></script>
-<script src="guide.js?v=guide-2" defer></script>
-<script src="app.js" type="module"></script>
+<link rel="stylesheet" href="styles.css?v=guide-3">
+<script src="config.js?v=guide-3" defer></script>
+<script src="translations.js?v=guide-3" defer></script>
+<script src="i18n.js?v=guide-3" defer></script>
+<script src="guide.js?v=guide-3" defer></script>
+<script src="app.js?v=guide-3" type="module"></script>
 </head>
 <body>
 <a class="skip" href="#main">Перейти к содержимому</a>
 <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
 <aside class="sidebar" aria-label="Оглавление инструкции">
-  <a class="sidebar-brand" href="#top"><span class="guide-icon" aria-hidden="true">↗</span>ИНСТРУКЦИЯ КАНДИДАТА</a>
-  <p class="sidebar-subtitle">Разработчик /<br>AI-автоматизация</p>
+  <p class="sidebar-title">Вакансия: Coder / <br>ИИ-автоматизация</p>
   <button class="mobile-nav-toggle" id="mobile-nav-toggle" type="button" aria-controls="guide-nav" aria-expanded="false">Содержание страницы <span aria-hidden="true">☰</span></button>
   <nav id="guide-nav" aria-label="Разделы страницы">
     <ol class="nav-list">
@@ -30,16 +31,14 @@
       <li><a class="nav-link" href="#upload">7. Загрузка ZIP-архива</a></li>
     </ol>
     <div class="nav-extras"><a class="nav-link" href="#checklist">✓ Чеклист перед заявкой</a><a class="nav-link" href="#faq">? Частые вопросы</a><a class="nav-link" href="#contact">Связь через HeadHunter</a></div>
-    <a class="sidebar-cta" href="#application">Перейти к анкете <span aria-hidden="true">↗</span></a>
-    <p class="sidebar-note">Сначала изучите инструкцию.<br>Затем заполняйте заявку.</p>
   </nav>
 </aside>
 <main class="main-content" id="main"><article class="page">
   <header class="document-header" id="top">
-    <div class="badge">ИНСТРУКЦИЯ КАНДИДАТА <span class="version-badge">ВЕРСИЯ 2</span></div>
-    <h1>Разработчик /<br>AI-автоматизация</h1>
+    <div class="document-toolbar"><div class="language-switch" role="group" aria-label="Язык страницы"><button type="button" data-language="ru" aria-pressed="true" lang="ru">RU</button><button type="button" data-language="en" aria-pressed="false" lang="en">EN</button></div></div>
+    <h1>Вакансия: Coder / <br>ИИ-автоматизация</h1>
     <p class="subtitle">Роль, условия работы и порядок подачи заявки. Прочитайте инструкцию, заполните анкету и подготовьте тестовое задание.</p>
-    <div class="header-tags"><span>🌍 Удалённо</span><span>⏱ Полная занятость</span><span>На русском</span></div>
+    <div class="header-tags"><span>🌍 Удалённо</span><span>⏱ Полная занятость</span></div>
   </header>
 
   <section class="guide-section" id="instructions" aria-labelledby="instruction-title">
@@ -55,7 +54,7 @@
   <section class="guide-section" id="role" aria-labelledby="role-title">
     <h2 id="role-title"><span class="num">2</span>О роли и задачах</h2>
     <p>Ищем человека, который превращает ручные процессы в работающие инструменты: использует AI, разбирается в задаче и доводит решение до результата.</p>
-    <div class="box box-success"><p class="box-title">✓ Главный принцип</p><p>Нам важен работающий результат и ваше умение мыслить самостоятельно. AI помогает создавать код, но за проверку и качество решения отвечаете вы.</p></div>
+    <div class="box box-success"><p class="box-title">✓ Главный принцип</p><p>Нам важен работающий результат и Ваше умение мыслить самостоятельно. AI помогает создавать код, но за проверку и качество решения отвечаете Вы.</p></div>
     <h3>Чем предстоит заниматься</h3>
     <ul class="content-list"><li><strong>Автоматизировать процессы:</strong> разбираться в работе команды, находить повторяющиеся действия и убирать ручную рутину.</li><li><strong>Соединять инструменты:</strong> создавать API-интеграции, скрипты, ботов, отчёты и внутренние интерфейсы с помощью AI.</li><li><strong>Проверять и поддерживать:</strong> тестировать решения, исправлять ошибки и оставлять понятную документацию для команды.</li></ul>
     <h3>Подход к решению задачи</h3>
@@ -64,57 +63,55 @@
 
   <section class="guide-section" id="requirements" aria-labelledby="requirements-title">
     <h2 id="requirements-title"><span class="num">3</span>Что мы ожидаем</h2>
-    <ul class="content-list"><li>Опыт работы с <strong>AI-инструментами разработки</strong>.</li><li>Понимание API, вебхуков и работы с данными.</li><li>Способность разобраться в коде и проверить его результат.</li><li>Самостоятельность и внимательное чтение инструкций.</li><li>Рабочий компьютер, стабильный интернет и понятная коммуникация.</li></ul>
-    <div class="box box-info"><p>Конкретный стек и окончательные требования дополним в следующей версии. В анкете можно указать инструменты, которыми вы уже пользовались.</p></div>
+    <ul class="content-list"><li>Опыт работы с <strong>AI-инструментами разработки</strong>.</li><li>Понимание API, вебхуков и работы с данными.</li><li>Способность разобраться в коде и проверить его результат.</li><li>Самостоятельность и внимательное чтение инструкций.</li><li>Рабочий компьютер, стабильный интернет и понятная коммуникация.</li><li><strong>Знание английского языка на уровне C1.</strong></li></ul>
+    <div class="box box-info"><p>Укажите в анкете инструменты, которыми Вы уже пользовались, и расскажите о Вашем опыте.</p></div>
   </section>
 
   <section class="guide-section" id="conditions" aria-labelledby="conditions-title">
     <h2 id="conditions-title"><span class="num">4</span>График и условия работы</h2>
-    <div class="table-wrap"><table><caption class="visually-hidden">Рабочий график по московскому времени</caption><thead><tr><th scope="col">Условие</th><th scope="col">Информация</th></tr></thead><tbody><tr><th scope="row">Формат</th><td>Удалённая работа, полная занятость.</td></tr><tr><th scope="row">Начало смены</th><td><strong>00:00 МСК</strong> — полночь по московскому времени.</td></tr><tr><th scope="row">Рабочие часы</th><td>Минимум 8 часов в день. Ориентир: <strong>00:00–08:00 МСК</strong>, без учёта перерывов.</td></tr><tr><th scope="row">Занятость</th><td>Минимум 40 часов в неделю. Рабочие дни уточняются.</td></tr><tr><th scope="row">Оплата</th><td>Условия опубликуем отдельно.</td></tr></tbody></table></div>
-    <details class="work-rules"><summary>Как организована работа <span aria-hidden="true">+</span></summary><div class="details-body"><p>В рабочем процессе используются Slack для задач и связи и Time Doctor для учёта времени. В референсных условиях: ответ в Slack в течение двух минут во время смены; перед перерывом — уведомление и пауза таймера.</p><p>Окончательную редакцию рабочих правил опубликуем отдельно. До найма вопросы кандидатов — только в чате HeadHunter.</p></div></details>
+    <div class="table-wrap"><table><caption class="visually-hidden">Рабочий график по московскому времени</caption><thead><tr><th scope="col">Условие</th><th scope="col">Информация</th></tr></thead><tbody><tr><th scope="row">Формат</th><td>Удалённая работа, полная занятость.</td></tr><tr><th scope="row">Начало смены</th><td><strong>00:00 МСК</strong> — полночь по московскому времени.</td></tr><tr><th scope="row">Рабочие часы</th><td>Минимум 8 часов в день. Ориентир: <strong>00:00–08:00 МСК</strong>, без учёта перерывов.</td></tr><tr><th scope="row">Занятость</th><td>Минимум 40 часов в неделю.</td></tr><tr><th scope="row">Оплата</th><td>Обсуждается индивидуально с кандидатом.</td></tr></tbody></table></div>
+    <details class="work-rules"><summary>Как организована работа <span aria-hidden="true">+</span></summary><div class="details-body"><p>В рабочем процессе используются Slack для задач и связи и Time Doctor для учёта времени. Отвечайте в Slack в течение двух минут во время смены; перед перерывом уведомляйте команду и ставьте таймер на паузу.</p><p>До найма вопросы кандидатов — только в чате HeadHunter.</p></div></details>
   </section>
 
   <section class="guide-section application-section" id="application" aria-labelledby="application-title">
     <h2 id="application-title"><span class="num">5</span>Анкета кандидата</h2>
-    <p>Расскажите об опыте и инструментах, которыми вы пользуетесь. Затем ниже находится блок тестового задания и прикрепления архива.</p>
-    <div class="preview-notice box box-warn" role="note"><p class="preview-label box-title">Предварительная версия</p><p id="preview-copy">Вопросы и тестовое задание ещё дополняются. Можно посмотреть форму и выбрать архив. Реальные заявки пока не отправляются.</p></div>
+    <p>Расскажите об опыте и инструментах, которыми Вы пользуетесь. Затем ниже находится блок тестового задания и прикрепления архива.</p>
     <div class="progress-summary"><span id="progress-text">Заполнено 0 из 6 пунктов</span><progress id="form-progress" value="0" max="6" aria-label="Заполнение анкеты"></progress></div>
 <form id="candidate-form">
       <div class="form-section-heading"><h3>Ваша анкета</h3><span>* обязательные поля</span></div>
-      <div class="field"><label for="candidate-name">Как вас зовут? <span aria-hidden="true">*</span></label><input id="candidate-name" name="candidateName" type="text" autocomplete="name" maxlength="150" required placeholder="Имя и фамилия"></div>
-      <div class="field-grid"><div class="field"><label for="candidate-city">Город и часовой пояс <span aria-hidden="true">*</span></label><input id="candidate-city" name="city" type="text" maxlength="150" required placeholder="Москва, МСК"></div><div class="field"><label for="candidate-hh">Профиль / резюме HeadHunter <span aria-hidden="true">*</span></label><input id="candidate-hh" name="headhunterUrl" type="url" inputmode="url" maxlength="500" required placeholder="https://hh.ru/resume/…"><span class="field-hint">Чтобы связать заявку с вашим откликом.</span></div></div>
+      <div class="field"><label for="candidate-name">Как Вас зовут? <span aria-hidden="true">*</span></label><input id="candidate-name" name="candidateName" type="text" autocomplete="name" maxlength="150" required placeholder="Имя и фамилия"></div>
+      <div class="field-grid"><div class="field"><label for="candidate-city">Город и часовой пояс <span aria-hidden="true">*</span></label><input id="candidate-city" name="city" type="text" maxlength="150" required placeholder="Москва, МСК"></div><div class="field"><label for="candidate-hh">Профиль / резюме HeadHunter <span aria-hidden="true">*</span></label><input id="candidate-hh" name="headhunterUrl" type="url" inputmode="url" maxlength="500" required placeholder="https://hh.ru/resume/…"><span class="field-hint">Чтобы связать заявку с Вашим откликом.</span></div></div>
       <div id="questions"></div>
       <label class="check-row instructions-check"><input type="checkbox" name="readInstructions" id="read-instructions" required><span>Я полностью прочитал(а) инструкцию, условия и понимаю, что вопросы нужно задавать только в чате HeadHunter. <span aria-hidden="true">*</span></span></label>
 
-      <section class="assignment guide-section" id="assignment" aria-labelledby="assignment-title"><h2 id="assignment-title"><span class="num">6</span>Тестовое задание <span class="pill">Скоро</span></h2><p id="assignment-description">Здесь появится тестовое задание: что нужно сделать, какой результат предоставить и по каким критериям мы его проверим.</p><div class="assignment-grid"><div><span aria-hidden="true">↳</span><h4>Результат работы</h4><p>Описание задачи и состав материалов добавим после утверждения задания.</p></div><div><span aria-hidden="true">▷</span><h4>Запись экрана</h4><p>Покажите, как вы выполняете задание и проверяете результат.</p></div></div><div class="assignment-note">Само задание пока не опубликовано. Выполнять тестовое на этом этапе не нужно.</div></section>
+      <section class="assignment guide-section" id="assignment" aria-labelledby="assignment-title"><h2 id="assignment-title"><span class="num">6</span>Тестовое задание</h2><p id="assignment-description">Подготовьте решение тестового задания и запишите процесс выполнения на видео. Покажите, как Вы подходите к задаче и проверяете результат.</p><div class="assignment-grid"><div><span aria-hidden="true">↳</span><h4>Результат работы</h4><p>Файлы решения и материалы, необходимые для его проверки.</p></div><div><span aria-hidden="true">▷</span><h4>Запись экрана</h4><p>Покажите, как Вы выполняете задание и проверяете результат.</p></div></div></section>
 
-      <section class="upload-section guide-section" id="upload" aria-labelledby="upload-title"><h2 id="upload-title"><span class="num">7</span>Загрузка ZIP-архива</h2><p class="muted upload-intro">Результат тестового задания и видео с записью экрана — в одном архиве. Итоговые требования к содержимому добавим вместе с заданием.</p>
+      <section class="upload-section guide-section" id="upload" aria-labelledby="upload-title"><h2 id="upload-title"><span class="num">7</span>Загрузка ZIP-архива</h2><p class="muted upload-intro">Результат тестового задания и видео с записью экрана — в одном архиве. Убедитесь, что архив содержит все материалы для проверки.</p>
       <div class="dropzone" id="dropzone"><div class="upload-icon" aria-hidden="true">↑</div><strong>Перетащите ZIP сюда</strong><p>или выберите файл на компьютере</p><label class="button secondary file-picker" for="zip-file">Выбрать файл <span aria-hidden="true">↗</span><input id="zip-file" type="file" accept=".zip,application/zip,application/x-zip-compressed" aria-label="Выбрать ZIP-архив"></label><small>Только .zip · до 2 ГиБ · файл не отправится автоматически</small></div>
       <div class="selected-file" id="selected-file" hidden><span class="file-icon" aria-hidden="true">ZIP</span><div class="file-details"><strong id="file-name"></strong><span id="file-size"></span></div><button id="remove-file" type="button" class="icon-button" aria-label="Удалить выбранный архив">×</button></div>
       <p id="file-status" class="file-status" role="status" aria-live="polite"></p><p id="file-error" class="field-error" role="alert" hidden></p>
       </section>
       <div id="consent-container" hidden></div>
-      <div class="submit-area"><button type="submit" class="button primary" id="submit-button">Проверить заявку <span aria-hidden="true">↗</span></button><p id="submit-hint">Предварительный просмотр. Ответы и архив останутся на вашем устройстве.</p></div>
+      <div class="submit-area"><button type="submit" class="button primary" id="submit-button">Проверить заявку <span aria-hidden="true">↗</span></button><p id="submit-hint">Проверьте ответы и прикреплённый архив.</p></div>
       <div class="upload-progress" id="upload-progress" hidden><label for="transfer-progress" id="transfer-label">Загрузка…</label><progress id="transfer-progress" value="0" max="100"></progress></div><p class="field-error" id="submit-error" role="alert" hidden></p>
     </form>
   </section>
   <section class="guide-section" id="checklist" aria-labelledby="checklist-title">
     <h2 id="checklist-title"><span class="section-symbol" aria-hidden="true">✓</span>Чеклист перед заявкой</h2>
-    <ul class="checklist"><li><span class="check-icon" aria-hidden="true">✓</span><span>Полностью прочитайте инструкцию и условия.</span></li><li><span class="check-icon" aria-hidden="true">✓</span><span>Укажите имя, город, часовой пояс и ссылку на HeadHunter.</span></li><li><span class="check-icon" aria-hidden="true">✓</span><span>Ответьте на обязательные вопросы анкеты.</span></li><li><span class="check-icon" aria-hidden="true">✓</span><span>После публикации задания подготовьте результат и запись экрана.</span></li><li><span class="check-icon" aria-hidden="true">✓</span><span>Соберите материалы в один ZIP-архив и проверьте его перед отправкой.</span></li></ul>
+    <ul class="checklist"><li><span class="check-icon" aria-hidden="true">✓</span><span>Полностью прочитайте инструкцию и условия.</span></li><li><span class="check-icon" aria-hidden="true">✓</span><span>Укажите имя, город, часовой пояс и ссылку на HeadHunter.</span></li><li><span class="check-icon" aria-hidden="true">✓</span><span>Ответьте на обязательные вопросы анкеты.</span></li><li><span class="check-icon" aria-hidden="true">✓</span><span>Подготовьте результат задания и запись экрана.</span></li><li><span class="check-icon" aria-hidden="true">✓</span><span>Соберите материалы в один ZIP-архив и проверьте его перед отправкой.</span></li></ul>
   </section>
   <section class="guide-section" id="faq" aria-labelledby="faq-title">
     <h2 id="faq-title"><span class="section-symbol" aria-hidden="true">?</span>Частые вопросы</h2>
-    <details class="faq-item"><summary>Куда писать, если есть вопрос?</summary><p>Только в чат вашего отклика на HeadHunter. Сначала прочитайте инструкцию: на вопросы, ответы на которые уже есть на странице, мы отвечать не будем.</p></details>
+    <details class="faq-item"><summary>Куда писать, если есть вопрос?</summary><p>Только в чат Вашего отклика на HeadHunter. Сначала прочитайте инструкцию: на вопросы, ответы на которые уже есть на странице, мы отвечать не будем.</p></details>
     <details class="faq-item"><summary>В каком часовом поясе указан график?</summary><p>В московском времени — МСК, UTC+3. Начало смены в 00:00, ориентир для восьми рабочих часов — до 08:00 без учёта перерывов.</p></details>
-    <details class="faq-item"><summary>Можно ли уже выполнять тестовое задание?</summary><p>Пока нет: задание ещё не опубликовано. Сейчас можно посмотреть структуру анкеты и область прикрепления ZIP.</p></details>
-    <details class="faq-item"><summary>Что должно быть в ZIP-архиве?</summary><p>Результат тестового задания и видео с записью экрана во время его выполнения. Окончательный состав материалов добавим вместе с заданием.</p></details>
-    <details class="faq-item"><summary>Выбранный архив сразу отправляется?</summary><p>Нет. Выбор файла сам по себе не отправляет его. В текущей предварительной версии анкета и архив вообще не отправляются на сервер.</p></details>
+    <details class="faq-item"><summary>Что должно быть в ZIP-архиве?</summary><p>Результат тестового задания и видео с записью экрана во время его выполнения. Убедитесь, что материалы можно открыть и проверить.</p></details>
+    <details class="faq-item"><summary>Выбранный архив сразу отправляется?</summary><p>Нет. Выбор файла сам по себе не отправляет его. Сначала заполните анкету, прикрепите архив и проверьте данные.</p></details>
   </section>
-  <section class="contact-box" id="contact" aria-labelledby="contact-title"><h2 id="contact-title">Остались вопросы?</h2><p>Сначала внимательно прочитайте инструкцию. Если ответа здесь нет, напишите в чат вашего отклика на <strong>HeadHunter</strong>.</p><a class="button contact-button" href="#instructions">Вернуться к инструкции ↑</a></section>
+  <section class="contact-box" id="contact" aria-labelledby="contact-title"><h2 id="contact-title">Остались вопросы?</h2><p>Сначала внимательно прочитайте инструкцию. Если ответа здесь нет, напишите в чат Вашего отклика на <strong>HeadHunter</strong>.</p><a class="button contact-button" href="#instructions">Вернуться к инструкции ↑</a></section>
   <footer class="footer"><p>Инструкция кандидата · Разработка / AI-автоматизация</p><p>Анкета → Тестовое задание → ZIP-архив</p></footer>
 </article></main>
 <button class="dark-toggle" id="theme-toggle" type="button" aria-label="Включить тёмную тему" aria-pressed="false"><span id="theme-icon" aria-hidden="true">☾</span></button>
-<dialog id="review-dialog" aria-labelledby="review-title"><div class="dialog-heading"><span class="eyebrow">ПРОВЕРКА ЗАЯВКИ</span><button class="icon-button" type="button" id="close-dialog" aria-label="Закрыть предварительный просмотр">×</button></div><h2 id="review-title">Всё на своих местах.</h2><p id="review-description">Это предварительный просмотр. Заявка не отправлена, архив не загружен на сервер.</p><dl id="review-summary"></dl><button type="button" class="button primary" id="return-to-form">Вернуться к анкете <span aria-hidden="true">↗</span></button></dialog>
+<dialog id="review-dialog" aria-labelledby="review-title"><div class="dialog-heading"><span class="eyebrow">ПРОВЕРКА ЗАЯВКИ</span><button class="icon-button" type="button" id="close-dialog" aria-label="Закрыть проверку заявки">×</button></div><h2 id="review-title">Проверьте Ваши данные.</h2><p id="review-description">Проверьте ответы и архив. Отправка заявки не выполнялась.</p><dl id="review-summary"></dl><button type="button" class="button primary" id="return-to-form">Вернуться к анкете <span aria-hidden="true">↗</span></button></dialog>
 <noscript><p class="noscript">Для работы анкеты и выбора файла включите JavaScript. Условия и инструкция доступны без него.</p></noscript>
 </body>
 </html>
