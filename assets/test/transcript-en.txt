@@ -1,0 +1,43 @@
+Step one. Start the recording. This assignment includes work in Google Sheets, a conversation with an AI assistant, and questions about your experience. There is no time limit. You may read the instructions and prepare your tools beforehand. Show the actual work in one continuous screen recording with your voice. You do not need a camera. Do not pause the screen recorder or join separate clips.
+
+You may pause, rewind, and replay these audio instructions. Pause the audio while answering questions and working. Keep the screen recording running. Leave mistakes and troubleshooting in the recording and explain what you are doing.
+
+Now read the opening statement from the page aloud and fill in your details: Hello. My name is, followed by your first and last name. I am based in, followed by your city and time zone. I am completing the Coder and AI Automation assignment. I am recording my screen and voice. Then pause the audio and continue to the next step when you are ready.
+
+Step two. Introduce yourself in your own words. What work experience do you have, and which tasks did you perform personally? Describe one specific task you have completed in Google Sheets. Which AI tools have you used, and for what purpose? If you have no work experience yet, say so and use a learning project as your example.
+
+Next, describe a situation where you did not know how to complete a task. How did you find a solution and check that it worked? What do you do when you receive feedback or discover your own mistake? Give specific examples of your actions. Pause the audio and answer all the questions. Keep the screen recording running.
+
+Step three. Download test-data.xlsx from the page and import it into Google Sheets. Complete the work in Google Sheets. Name the document Test, followed by your name and the date. The file contains two source sheets, Orders and Catalog. All data is fictional, and monetary values are in US dollars.
+
+Preserve both source sheets unchanged. Create a working sheet named Work, a summary sheet named Summary, and a sheet named AI_Log to document your AI conversation. The source column names and processing rules are on the page. Pause the audio, create the spreadsheet, and explain the data structure aloud. Keep the screen recording running.
+
+Step four. Prepare the data on Work. Remove spaces around SKU codes and statuses. Matching must be case-insensitive. Count an exact duplicate order only once. Do not change the source sheet Orders.
+
+After removing duplicates, assign one decision to each order. Cancelled means the order was cancelled and must be excluded from monetary totals. Use Review when the SKU is not found in the catalog, quantity is missing, or quantity is not a positive integer. Record the reason beside the decision. Use Include for all other orders with a New or Shipped status. Do not invent missing values.
+
+For each order, show its original ID and fields, normalized SKU and status, product name, unit cost, decision, and reason. You may use any suitable Google Sheets formulas and features. Show any AI assistance in the recording. Pause the audio and complete this step. Keep the screen recording running.
+
+Step five. For orders with an Include decision, calculate order value as quantity multiplied by unit price. Calculate margin as quantity multiplied by the difference between unit price and unit cost. Leave both monetary results blank for Cancelled and Review orders. This is an exercise margin before other expenses.
+
+On Summary, show the number of unique orders and the number in each of the three groups: Include, Cancelled, and Review. Separately show total units, order value, and margin for Include orders only. Below that, summarize Include orders by SKU, showing order count, units, value, and margin. Add a chart of order value by SKU.
+
+Use formulas or a pivot table for monetary calculations and the summary. Do not type final totals manually. Add a filter on Work, freeze its header row, apply a monetary format with two decimal places, and add conditional formatting for Review decisions. Pause the audio and complete this step. Keep the screen recording running.
+
+Step six. Open a new conversation in any AI tool available to you. Choose a real task from this spreadsheet, such as help with a product lookup formula, exception handling, or checking the summary. Write your first prompt yourself in English and show yourself composing it on screen. Include the context, goal, rules, and expected response format.
+
+After the reply, send at least one substantive follow-up that improves the solution, handles an edge case, or tests an assumption. Asking the AI to continue is not enough. Check the proposed solution against a normal order and a problematic row. Explain what you accepted, what you changed, and why. If the answer is correct, demonstrate your check and explain why it fits.
+
+Then ask the AI to draft a short update to your manager in English using your results. Supply the actual numbers from your spreadsheet and ask it not to invent missing information. Check every number and save the corrected final message. In AI_Log, save the prompts, relevant replies, your changes, your verification method, and the manager update. Pause the audio and complete this step. Keep the screen recording running.
+
+Step seven. Verify the result independently. Show an exact duplicate, a cancelled order, and a row requiring review. Explain aloud how they affect the totals. Manually check the value and margin of one included order. Check that the SKU totals reconcile to the overall summary and that unique orders equal the sum of the three decision groups.
+
+On Work, temporarily increase the quantity in order O-1001 by one unit. Show the updated order value, overall summary, and chart. Restore the original quantity and verify the totals again. If anything fails to update, find and fix the cause in the recording.
+
+After verification, explain in your own words in English what you built, a problem you found, how you used AI, how you checked its answer, and what you would improve next. Aim for one or two minutes. No prepared script is provided for this answer. Pause the audio, perform the checks, and give your explanation. Keep the screen recording running.
+
+Step eight. Show the completed Work, Summary, and AI_Log sheets. Export the Google spreadsheet in Excel format and save it as result.xlsx. Prepare README.txt with your name, the date, the tools used, what you completed, any unresolved issues, and how to open the result. You may include a Google Sheets link, but result.xlsx is required.
+
+Finish by stating what you completed and what remains unresolved. Then stop the screen recording. After stopping it, create one ZIP archive containing one complete screen recording with your voice, result.xlsx, and README.txt. AI_Log must be included in the spreadsheet. You may compress the full video without removing or rearranging any sections. Check the beginning, middle, and end of the video, screen readability, and voice audibility.
+
+Attach the ZIP to your application on the main site. If you have a question that the instructions do not answer, ask it in your HeadHunter application chat. We will not answer questions already covered by the instructions. This is also part of the attention-to-detail check.

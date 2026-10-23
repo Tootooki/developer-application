@@ -190,6 +190,11 @@ window.HIRING_EN = {
   "Состояние загрузки изменилось. Повторите отправку с той же сессией.": "The upload state has changed. Retry using the same session."
 };
 
+Object.assign(window.HIRING_EN, {
+  'Google Sheets и AI: данные, аудиоинструкция, вопросы и полный текст задания — на отдельной странице. Выполнение нужно записать одним непрерывным видео: экран и голос, без камеры. Время не ограничено.': 'Google Sheets and AI: exercise data, audio instructions, questions, and the full assignment are on a separate page. Record the work in one continuous video with your screen and voice, without a camera. There is no time limit.',
+  'Открыть тестовое задание': 'Open the test assignment'
+});
+
 for (const question of window.HIRING_CONFIG.questions) {
   if (question.required && window.HIRING_EN[question.label]) window.HIRING_EN[question.label + ' *'] = window.HIRING_EN[question.label] + ' *';
 }

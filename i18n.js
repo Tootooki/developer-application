@@ -44,6 +44,11 @@
     for (const [element, binding] of bindings) if (element.isConnected) element.textContent = t(binding.source, binding.values);
     document.documentElement.lang = language;
     for (const button of buttonGroup.querySelectorAll('[data-language]')) button.setAttribute('aria-pressed', String(button.dataset.language === language));
+    for (const link of document.querySelectorAll('[data-language-link]')) {
+      const url = new URL(link.getAttribute('href'), location.href);
+      url.searchParams.set('lang', language);
+      link.href = url;
+    }
   }
   function setLanguage(next) {
     if (!['ru', 'en'].includes(next)) return;
